@@ -30,7 +30,21 @@ describe('Requisito 3 Teste o componente FavoritePokemons', () => {
     userEvent.click(favoriteLink);
 
     const StarImg = screen.getByRole('img', { name: /ekans is marked as favorite/i });
-
     expect(StarImg).toBeInTheDocument();
+  });
+
+  it('Teste se o pokemon é adicionao ao favorito e removido', () => {
+    renderWithRouter(<App />);
+    userEvent.click(screen.getByRole('button', { name: /psychic/i }));
+
+    userEvent.click(screen.getByRole('link', { name: /more details/i }));
+
+    userEvent.click(screen.getByRole('checkbox', { name: /pokémon favoritado\?/i }));
+    userEvent.click(screen.getByRole('checkbox', { name: /pokémon favoritado\?/i }));
+
+    userEvent.click(screen.getByRole('link', { name: /favorite pokémons/i }));
+
+    expect(screen.queryByRole('img', { name: /alakazam is marked as favorite/i }))
+      .not.toBeInTheDocument();
   });
 });
