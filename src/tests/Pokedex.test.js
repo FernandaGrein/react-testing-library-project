@@ -4,6 +4,8 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './RenderWithRouter';
 import App from '../App';
 
+const POKEMONS = ['Pikachu', 'Charmander', 'Caterpie', 'Ekans',
+  'Alakazam', 'Mew', 'Rapidash', 'Snorlax', 'Dragonair', 'Pikachu'];
 describe('Teste o componente Pokedex', () => {
   it(' se a página contém um heading h2 com o texto Encountered pokémons', () => {
     renderWithRouter(<App />);
@@ -16,12 +18,29 @@ describe('Teste o componente Pokedex', () => {
   it(`Teste se é exibido o próximo pokémon da lista 
   quando o botão Próximo pokémon é clicado`, () => {
     renderWithRouter(<App />);
-    const NextButton = screen.getByRole('button', { name: /próximo pokémon/i });
-    const nextPokemon = screen.getByRole('button', { name: /próximo pokémon/i });
+    const pikachuPokemon = screen.getByText(/pikachu/i);
+    expect(pikachuPokemon).toBeInTheDocument();
 
+    const NextButton = screen.getByRole('button', { name: /próximo pokémon/i });
     userEvent.click(NextButton);
-    expect(nextPokemon).toBeInTheDocument();
+
+    const charmanderPokemon = screen.getByText(/charmander/i);
+    expect(charmanderPokemon).toBeInTheDocument();
   });
+
+  it(`testa se todos os pokemons aparecem na tela ao clicar em 
+  próximo e retorna ao primeiro`, () => {
+    renderWithRouter(<App />);
+    const firstPokemon = screen.getByText(/pikachu/i);
+    expect(firstPokemon).toBeInTheDocument();
+    const NextButton = screen.getByRole('button', { name: /próximo pokémon/i });
+
+    POKEMONS.forEach((pokemon) => {
+      expect(screen.getByText(pokemon)).toBeInTheDocument();
+      userEvent.click(NextButton);
+    });
+  });
+
   it('Teste se é mostrado apenas um pokémon por vez', () => {
     renderWithRouter(<App />);
     const allPokemonsImg = screen.getAllByRole('img');
