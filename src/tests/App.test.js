@@ -13,9 +13,6 @@ test('se o topo da aplicação contém um conjunto fixo de links', () => {
   expect(HomeLinkElement).toBeInTheDocument();
   expect(AboutLinkElement).toBeInTheDocument();
   expect(FavoriteLinkElement).toBeInTheDocument();
-
-//   const AllLinks = screen.getAllByRole('link');
-//   expect(AllLinks).toHaveLength(4);
 });
 
 test('se a aplicação é redirecionada para a página inicial ao clicar no link Home',

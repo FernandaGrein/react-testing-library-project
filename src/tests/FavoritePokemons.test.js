@@ -1,8 +1,9 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './RenderWithRouter';
 import { FavoritePokemons } from '../pages';
+import App from '../App';
 
 describe('Requisito 3 Teste o componente FavoritePokemons', () => {
   it(`se é exibida na tela a mensagem No favorite pokemon found, 
@@ -14,9 +15,22 @@ describe('Requisito 3 Teste o componente FavoritePokemons', () => {
     expect(noFavoriteText).toBeInTheDocument();
   });
 
-//   it('Teste se são exibidos todos os cards de pokémons favoritados', () => {
-//     renderWithRouter(<FavoritePokemons />);
-//     renderWithRouter(<PokemonDetails />);
-//     import PokemonDetails
-//   });
+  it('Teste se são exibidos todos os cards de pokémons favoritados', () => {
+    renderWithRouter(<App />);
+    const poisonBtn = screen.getByRole('button', { name: /poison/i });
+    userEvent.click(poisonBtn);
+
+    const detailsLink = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(detailsLink);
+
+    const checkbox = screen.getByRole('checkbox', { name: /pokémon favoritado\?/i });
+    userEvent.click(checkbox);
+
+    const favoriteLink = screen.getByRole('link', { name: /favorite pokémons/i });
+    userEvent.click(favoriteLink);
+
+    const StarImg = screen.getByRole('img', { name: /ekans is marked as favorite/i });
+
+    expect(StarImg).toBeInTheDocument();
+  });
 });
