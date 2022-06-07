@@ -4,9 +4,10 @@ import { About } from '../pages';
 import renderWithRouter from './RenderWithRouter';
 
 describe('Teste o componente About', () => {
-  it('se a página contém as informações sobre a Pokédex', () => {
+  beforeEach(() => {
     renderWithRouter(<About />);
-
+  });
+  it('se a página contém as informações sobre a Pokédex', () => {
     const textElementBegin = screen
       .getByText(/This application simulates a Pokédex/i);
     const textElementFinal = screen
@@ -20,21 +21,18 @@ describe('Teste o componente About', () => {
   });
 
   it('se a página contém um heading h2 com o texto About Pokédex', () => {
-    renderWithRouter(<About />);
     const titleElment = screen.getByRole('heading', { name: 'About Pokédex', level: 2 });
 
     expect(titleElment).toBeInTheDocument();
   });
 
   it('se a página contém dois parágrafos com texto sobre a Pokédex', () => {
-    renderWithRouter(<About />);
     const allParagraph = screen.getAllByText(/Pokémons/i);
 
     expect(allParagraph).toHaveLength(2);
   });
 
   it('se a página contém a seguinte imagem de uma Pokédex', () => {
-    renderWithRouter(<About />);
     const imgLink = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
     const image = screen.getByRole('img', { name: /Pokédex/i });
 

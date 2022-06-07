@@ -54,7 +54,7 @@ describe('Teste o componente App', () => {
     history.push('/urlDesconhecida');
 
     const notFoundTitle = screen
-      .getByRole('heading', { name: /Page requested not found/i });
+      .getByRole('heading', { name: /Page requested not found/i, level: 2 });
     expect(notFoundTitle).toBeInTheDocument();
   });
 });

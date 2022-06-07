@@ -5,9 +5,11 @@ import App from '../App';
 import renderWithRouter from './RenderWithRouter';
 
 describe('Teste o componente PokemonDetails', () => {
+  beforeEach(() => {
+    renderWithRouter(<App />);
+  });
   it(`Teste se as informações detalhadas do pokémon selecionado 
   são mostradas na tela`, () => {
-    renderWithRouter(<App />);
     const allBtn = screen.getByRole('button', { name: /all/i });
     userEvent.click(allBtn);
 
@@ -20,7 +22,6 @@ describe('Teste o componente PokemonDetails', () => {
   });
 
   it('seção de detalhes deve conter um parágrafo com o resumo do pokémon', () => {
-    renderWithRouter(<App />);
     const allBtn = screen.getByRole('button', { name: /all/i });
     userEvent.click(allBtn);
 
@@ -33,7 +34,6 @@ describe('Teste o componente PokemonDetails', () => {
   });
   it(` se existe na página uma seção com os 
   mapas contendo as localizações do pokémon`, () => {
-    renderWithRouter(<App />);
     const allBtn = screen.getByRole('button', { name: /all/i });
     userEvent.click(allBtn);
 
@@ -51,7 +51,6 @@ describe('Teste o componente PokemonDetails', () => {
   });
 
   it('se o usuário pode favoritar um pokémon através da página de detalhes', () => {
-    renderWithRouter(<App />);
     const allBtn = screen.getByRole('button', { name: /all/i });
     userEvent.click(allBtn);
 
@@ -67,7 +66,6 @@ describe('Teste o componente PokemonDetails', () => {
   });
 
   it('testa se seção de detalhes contém um heading h2 com o texto Summary', () => {
-    renderWithRouter(<App />);
     const allBtn = screen.getByRole('button', { name: /all/i });
     userEvent.click(allBtn);
 

@@ -7,8 +7,10 @@ import App from '../App';
 const POKEMONS = ['Pikachu', 'Charmander', 'Caterpie', 'Ekans',
   'Alakazam', 'Mew', 'Rapidash', 'Snorlax', 'Dragonair', 'Pikachu'];
 describe('Teste o componente Pokedex', () => {
-  it(' se a página contém um heading h2 com o texto Encountered pokémons', () => {
+  beforeEach(() => {
     renderWithRouter(<App />);
+  });
+  it(' se a página contém um heading h2 com o texto Encountered pokémons', () => {
     const titleEl = screen
       .getByRole('heading', { name: /encountered pokémons/i, level: 2 });
 
@@ -17,7 +19,6 @@ describe('Teste o componente Pokedex', () => {
 
   it(`Teste se é exibido o próximo pokémon da lista 
   quando o botão Próximo pokémon é clicado`, () => {
-    renderWithRouter(<App />);
     const pikachuPokemon = screen.getByText(/pikachu/i);
     expect(pikachuPokemon).toBeInTheDocument();
 
@@ -30,7 +31,6 @@ describe('Teste o componente Pokedex', () => {
 
   it(`testa se todos os pokemons aparecem na tela ao clicar em 
   próximo e retorna ao primeiro`, () => {
-    renderWithRouter(<App />);
     const firstPokemon = screen.getByText(/pikachu/i);
     expect(firstPokemon).toBeInTheDocument();
     const NextButton = screen.getByRole('button', { name: /próximo pokémon/i });
@@ -42,15 +42,11 @@ describe('Teste o componente Pokedex', () => {
   });
 
   it('Teste se é mostrado apenas um pokémon por vez', () => {
-    renderWithRouter(<App />);
     const allPokemonsImg = screen.getAllByRole('img');
-
     expect(allPokemonsImg).toHaveLength(1);
   });
 
   it('Teste se a Pokédex tem os botões de filtro', () => {
-    renderWithRouter(<App />);
-
     const allBtn = screen.getByRole('button', { name: /all/i });
     expect(allBtn).toBeInTheDocument();
 
@@ -82,7 +78,6 @@ describe('Teste o componente Pokedex', () => {
 
   it(`A partir da seleção de um botão de tipo, 
   a Pokédex deve circular somente pelos pokémons daquele tipo`, () => {
-    renderWithRouter(<App />);
     const fireBtn = screen.getByRole('button', { name: /fire/i });
     userEvent.click(fireBtn);
 
@@ -95,7 +90,6 @@ describe('Teste o componente Pokedex', () => {
 
   it(`testa se os pokémons são mostrados normalmente (sem filtros) 
   quando o botão All for clicado`, () => {
-    renderWithRouter(<App />);
     const poisonBtn = screen.getByRole('button', { name: /poison/i });
     userEvent.click(poisonBtn);
 
