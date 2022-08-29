@@ -3,8 +3,8 @@ no módulo de front-end da Trybe.
 
 Para acessar o projeto, clone o presente repositório, entre na pasta,
 instale as dependências necessárias com o npm instal e rode a aplicação com o comando star
- - git clone
- - cd
+ - git clone git@github.com:FernandaGrein/react-testing-library-project.git
+ - cd react-testing-library-project
  - npm install
  - npm start
 
